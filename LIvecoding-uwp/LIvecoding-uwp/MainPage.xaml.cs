@@ -22,9 +22,11 @@ namespace LIvecoding_uwp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
+        public MainPage(Frame frame)
         {
             this.InitializeComponent();
+            MySplitView.Content = frame;
         }
+        
     }
 }

@@ -2,12 +2,71 @@
     x:Class="LIvecoding_uwp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LIvecoding_uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:data="using:Microsoft.Toolkit.Uwp.SampleApp.Data"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ButtonTemplate" x:DataType="data:PhotoDataItem">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="{x:Bind Thumbnail}" 
+                       Stretch="UniformToFill" 
+                       Margin="12,12,11,12"/>
+                <TextBlock Grid.Column="1" 
+                           Text="{x:Bind Title}" 
+                           Foreground="White" 
+                           FontSize="16" 
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <DataTemplate x:Key="OptionTemplate">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <FontIcon Grid.Column="0" 
+                          Margin="12,12,11,12" 
+                          FontFamily="Segoe MDL2 Assets" 
+                          Glyph="{Binding Glyph}" Foreground="White" />
+                <TextBlock Grid.Column="1" 
+                           Text="{Binding Name}" 
+                           Foreground="White" 
+                           FontSize="16" VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="50" BorderThickness="1" BorderBrush="Black">
+        <controls:HamburgerMenu PaneBackground="Black" x:Name="HamburgerMenu"
+                                Foreground="White"
+                                ItemTemplate="{StaticResource ButtonTemplate}"
+                                OptionsItemTemplate="{StaticResource OptionTemplate}"
+                                ItemClick="HamburgerMenu_OnItemClick"
+                                OptionsItemClick="HamburgerMenu_OnOptionsItemClick"
+                                OpenPaneLength="248"
+                                DisplayMode="CompactInline"
+                                CompactPaneLength="48"
+                                HamburgerHeight="48"
+                                IsPaneOpen="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Background="Black" Grid.Row="0">
+                    <TextBlock x:Name="Header" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Image x:Name="Image" Grid.Row="1"/>
+            </Grid>
+        </controls:HamburgerMenu>
     </Grid>
 </Page>
+
+    
