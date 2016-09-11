@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
-    "livecoding-api-pcl": "1.1.4",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
+    "livecoding-api-pcl": "1.1.8",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
   },
   "frameworks": {
     "uap10.0": {}
