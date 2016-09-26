@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="LIvecoding_uwp.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LIvecoding_uwp.Views"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding _loginViewModel, Source={StaticResource Locator}}">
+
+    <!--<Interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction command="{Binding chargePageCommand}"/>
+        </core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>-->
+
+    <Page.Resources>
+        <DataTemplate x:Key="DefaultTemplate">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Grid.Column="0" Symbol="{Binding Icon, Mode=OneWay}" Foreground="White" />
+                <TextBlock Grid.Column="1" Text="{Binding Name, Mode=OneWay}" FontSize="16" VerticalAlignment="Center" Foreground="White" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:HamburgerMenu x:Name="hamburgerMenuControl"
+                                PaneBackground="Black"
+                                Foreground="White"
+                                ItemTemplate="{StaticResource DefaultTemplate}"
+                                ItemsSource="{Binding Source={StaticResource Locator}, Path=_loginViewModel._menuItems}"
+                                OptionsItemTemplate="{StaticResource DefaultTemplate}"
+                                >
+            <Frame x:Name="contentFrame"/>
+        </controls:HamburgerMenu>
+    </Grid>
+</Page>
