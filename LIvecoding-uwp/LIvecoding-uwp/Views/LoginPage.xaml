@@ -36,7 +36,9 @@
                                 ItemsSource="{Binding Source={StaticResource Locator}, Path=_loginViewModel._menuItems}"
                                 OptionsItemTemplate="{StaticResource DefaultTemplate}"
                                 >
-            <Frame x:Name="contentFrame"/>
+            <Frame x:Name="contentFrame" Background="Black">
+               
+            </Frame>
         </controls:HamburgerMenu>
     </Grid>
 </Page>

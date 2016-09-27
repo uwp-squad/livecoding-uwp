@@ -100,14 +100,13 @@
     <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\MenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\IViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="Views\LiveStreamView.xaml.cs">
-      <DependentUpon>LiveStreamView.xaml</DependentUpon>
+    <Compile Include="Views\LiveStreamPage.xaml.cs">
+      <DependentUpon>LiveStreamPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
@@ -122,6 +121,7 @@
   <ItemGroup>
     <Content Include="Assets\cljr-code-hydra.gif" />
     <Content Include="Assets\user.png" />
+    <Content Include="Assets\userdashboard-img.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -139,11 +139,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\LiveStreamView.xaml">
+    <Page Include="Views\LiveStreamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

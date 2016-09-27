@@ -12,7 +12,7 @@ using Windows.UI.Xaml;
 
 namespace LIvecoding_uwp.ViewModels
 {
-    public class LoginViewModel: IViewModelBase
+    public class LoginViewModel: ViewModelBase
     {
         private IRepository repo;
         public ICommand chargePageCommand { get; set; }
@@ -24,7 +24,7 @@ namespace LIvecoding_uwp.ViewModels
             }
             set
             {
-                NotifyPropertyChanged(ref menuItems, value);
+                RaisePropertyChanged();
             }
         }
 
@@ -33,18 +33,11 @@ namespace LIvecoding_uwp.ViewModels
         {
             repo = menuRepo;
             chargePageCommand = new RelayCommand(ChargerPersonne);
-            //_menuItems = (ObservableCollection<MenuItem>)menuRepo.Get<MenuItem>();
-            //chargePageCommand = new RelayCommand<RoutedEventArgs>(OnPageLoaded);
         }
 
         internal void ChargerPersonne()
         {
             _menuItems = (ObservableCollection<MenuItem>)repo.Get<MenuItem>();
         }
-
-        //private void OnPageLoaded(RoutedEventArgs obj)
-        //{
-        //    _menuItems = (ObservableCollection<MenuItem>)new MenuRepository().Get<MenuItem>();
-        //}
     }
 }
