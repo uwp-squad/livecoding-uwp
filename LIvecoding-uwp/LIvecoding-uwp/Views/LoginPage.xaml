@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="LIvecoding_uwp.Views.LoginView"
+    x:Class="LIvecoding_uwp.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LIvecoding_uwp.Views"
@@ -9,11 +9,6 @@
     mc:Ignorable="d"
     DataContext="{Binding _loginViewModel, Source={StaticResource Locator}}">
 
-    <!--<Interactivity:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction command="{Binding chargePageCommand}"/>
-        </core:EventTriggerBehavior>
-    </Interactivity:Interaction.Behaviors>-->
 
     <Page.Resources>
         <DataTemplate x:Key="DefaultTemplate">
@@ -37,7 +32,7 @@
                                 OptionsItemTemplate="{StaticResource DefaultTemplate}"
                                 >
             <Frame x:Name="contentFrame" Background="Black">
-               
+
             </Frame>
         </controls:HamburgerMenu>
     </Grid>

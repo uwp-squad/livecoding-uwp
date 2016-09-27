@@ -24,6 +24,7 @@ namespace LIvecoding_uwp.ViewModels
             }
             set
             {
+                menuItems = value;
                 RaisePropertyChanged();
             }
         }
@@ -32,12 +33,13 @@ namespace LIvecoding_uwp.ViewModels
         public LoginViewModel(IRepository menuRepo)
         {
             repo = menuRepo;
-            chargePageCommand = new RelayCommand(ChargerPersonne);
+            chargePageCommand = new RelayCommand(ChargerMenu);
         }
 
-        internal void ChargerPersonne()
+        internal void ChargerMenu()
         {
-            _menuItems = (ObservableCollection<MenuItem>)repo.Get<MenuItem>();
+            var items = repo.Get<MenuItem>();
+            _menuItems =items as ObservableCollection<MenuItem> ; 
         }
     }
 }
