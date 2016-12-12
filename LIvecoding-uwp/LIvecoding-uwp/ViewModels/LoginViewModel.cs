@@ -3,6 +3,9 @@ using GalaSoft.MvvmLight;
 using LIvecoding_uwp.Configuration;
 using LivecodingApi.Model;
 using LivecodingApi.Services;
+using GalaSoft.MvvmLight.Views;
+using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
 
 namespace LIvecoding_uwp.Infrastructure
 {
@@ -11,14 +14,18 @@ namespace LIvecoding_uwp.Infrastructure
         #region Fields
 
         private IReactiveLivecodingApiService _livecodingApiService;
+        private INavigationService _navigationService;
 
         #endregion
 
         #region Constructor
 
-        public LoginViewModel(IReactiveLivecodingApiService livecodingApiService)
+        public LoginViewModel(
+            IReactiveLivecodingApiService livecodingApiService,
+            INavigationService navigationService)
         {
             _livecodingApiService = livecodingApiService;
+            _navigationService = navigationService;
 
             Authenticate();
         }
@@ -30,9 +37,12 @@ namespace LIvecoding_uwp.Infrastructure
         public void Authenticate()
         {
             _livecodingApiService.Login(AuthConstants.ClientId, AuthConstants.ClientSecret, new[] { AuthenticationScope.Read })
-                .Subscribe((result) =>
+                .Subscribe(async (result) =>
                 {
-                    // TODO
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        _navigationService.NavigateTo("Main");
+                    });
                 },
                 (error) =>
                 {
