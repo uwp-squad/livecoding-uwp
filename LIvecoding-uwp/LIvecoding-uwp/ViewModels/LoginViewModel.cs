@@ -1,45 +1,45 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using LIvecoding_uwp.Models;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.UI.Xaml;
+using GalaSoft.MvvmLight;
+using LIvecoding_uwp.Configuration;
+using LivecodingApi.Model;
+using LivecodingApi.Services;
 
-namespace LIvecoding_uwp.ViewModels
+namespace LIvecoding_uwp.Infrastructure
 {
-    public class LoginViewModel: ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
-        private IRepository repo;
-        public ICommand chargePageCommand { get; set; }
-        private ObservableCollection<MenuItem> menuItems;
-        public ObservableCollection<MenuItem> _menuItems {
-            get
-            {
-                return menuItems;
-            }
-            set
-            {
-                menuItems = value;
-                RaisePropertyChanged();
-            }
+        #region Fields
+
+        private IReactiveLivecodingApiService _livecodingApiService;
+
+        #endregion
+
+        #region Constructor
+
+        public LoginViewModel(IReactiveLivecodingApiService livecodingApiService)
+        {
+            _livecodingApiService = livecodingApiService;
+
+            Authenticate();
         }
 
-        //constructor
-        public LoginViewModel(IRepository menuRepo)
+        #endregion
+
+        #region Methods
+
+        public void Authenticate()
         {
-            repo = menuRepo;
-            chargePageCommand = new RelayCommand(ChargerMenu);
+            _livecodingApiService.Login(AuthConstants.ClientId, AuthConstants.ClientSecret, new[] { AuthenticationScope.Read })
+                .Subscribe((result) =>
+                {
+                    // TODO
+                },
+                (error) =>
+                {
+                    throw new Exception();
+                });
         }
 
-        internal void ChargerMenu()
-        {
-            var items = repo.Get<MenuItem>();
-            _menuItems =items as ObservableCollection<MenuItem> ; 
-        }
+        #endregion
     }
 }

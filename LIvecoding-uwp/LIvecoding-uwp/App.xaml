@@ -3,12 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LIvecoding_uwp"
-    xmlns:vm="using:LIvecoding_uwp.ViewModels"
+    xmlns:inf="using:LIvecoding_uwp.Infrastructure"
     RequestedTheme="Light">
     
     <Application.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" />
+            <inf:ViewModelLocator x:Key="Locator" />
         </ResourceDictionary>
     </Application.Resources>
 
