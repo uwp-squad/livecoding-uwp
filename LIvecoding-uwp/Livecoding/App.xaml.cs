@@ -1,5 +1,4 @@
-﻿using LIvecoding_uwp.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,9 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Livecoding.UWP.Views;
 
-
-namespace LIvecoding_uwp
+namespace Livecoding.UWP
 {
     /// <summary>
     /// Fournit un comportement spécifique à l'application afin de compléter la classe Application par défaut.

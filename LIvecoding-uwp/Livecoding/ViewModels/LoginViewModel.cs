@@ -1,13 +1,13 @@
 using System;
 using GalaSoft.MvvmLight;
-using LIvecoding_uwp.Configuration;
+using Livecoding.UWP.Configuration;
 using LivecodingApi.Model;
 using LivecodingApi.Services;
 using GalaSoft.MvvmLight.Views;
 using Windows.UI.Core;
 using Windows.ApplicationModel.Core;
 
-namespace LIvecoding_uwp.Infrastructure
+namespace Livecoding.UWP.Infrastructure
 {
     public class LoginViewModel : ViewModelBase
     {

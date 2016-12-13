@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.25928.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIvecoding-uwp", "LIvecoding-uwp\LIvecoding-uwp.csproj", "{B31CE2A2-5F45-455A-BCD5-F91110E76C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livecoding.UWP", "Livecoding\Livecoding.UWP.csproj", "{B31CE2A2-5F45-455A-BCD5-F91110E76C61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

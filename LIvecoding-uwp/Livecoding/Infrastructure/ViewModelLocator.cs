@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
-using LIvecoding_uwp.Views;
+using Livecoding.UWP.Views;
 using LivecodingApi.Services;
 using Microsoft.Practices.ServiceLocation;
 
-namespace LIvecoding_uwp.Infrastructure
+namespace Livecoding.UWP.Infrastructure
 {
     public class ViewModelLocator
     {

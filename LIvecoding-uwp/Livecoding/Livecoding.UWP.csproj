@@ -7,8 +7,8 @@
     <ProjectGuid>{B31CE2A2-5F45-455A-BCD5-F91110E76C61}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LIvecoding_uwp</RootNamespace>
-    <AssemblyName>LIvecoding-uwp</AssemblyName>
+    <RootNamespace>Livecoding.UWP</RootNamespace>
+    <AssemblyName>Livecoding.UWP</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -110,7 +110,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="LIvecoding-uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\user.png" />

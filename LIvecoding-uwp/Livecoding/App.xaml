@@ -1,9 +1,9 @@
 ﻿<Application
-    x:Class="LIvecoding_uwp.App"
+    x:Class="Livecoding.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LIvecoding_uwp"
-    xmlns:inf="using:LIvecoding_uwp.Infrastructure"
+    xmlns:local="using:Livecoding.UWP"
+    xmlns:inf="using:Livecoding.UWP.Infrastructure"
     RequestedTheme="Light">
     
     <Application.Resources>

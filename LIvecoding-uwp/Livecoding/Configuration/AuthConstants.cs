@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LIvecoding_uwp.Configuration
+namespace Livecoding.UWP.Configuration
 {
     internal static class AuthConstants
     {
