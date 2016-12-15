@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Livecoding.UWP.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,10 +18,22 @@ namespace Livecoding.UWP.Views
 {
     public sealed partial class MainPage : Page
     {
+        #region Constructor
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            var mainItems = GetMainItems();
+
+            HamburgerMenuControl.ItemsSource = mainItems;
+            HamburgerMenuControl.SelectedItem = mainItems.FirstOrDefault();
+            HamburgerMenuControl.OptionsItemsSource = GetOptionsItems();
         }
+
+        #endregion
+
+        #region Events
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -34,7 +47,30 @@ namespace Livecoding.UWP.Views
 
         private void OnMenuItemClick(object sender, ItemClickEventArgs e)
         {
-            // TODO
+            var menuItem = e.ClickedItem as MenuItem;
+            ContentFrame.Navigate(menuItem.PageType);
         }
+
+        #endregion
+
+        #region Methods
+
+        private List<MenuItem> GetMainItems()
+        {
+            return new List<MenuItem>
+            {
+                new MenuItem { Icon = Symbol.Home, Name = "Livestreams", PageType = typeof(LivestreamsPage) }
+            };
+        }
+
+        private List<MenuItem> GetOptionsItems()
+        {
+            return new List<MenuItem>
+            {
+
+            };
+        }
+
+        #endregion
     }
 }

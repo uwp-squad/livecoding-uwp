@@ -8,13 +8,32 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="MenuItemTemplate">
+            <Grid Width="240" Height="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <SymbolIcon Grid.Column="0" Symbol="{Binding Path=Icon}" 
+                            Foreground="White" />
+                
+                <TextBlock Grid.Column="1" Text="{Binding Path=Name}" 
+                           FontSize="16" VerticalAlignment="Center" Foreground="White" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:HamburgerMenu x:Name="HamburgerMenuControl"
                                 DisplayMode="CompactOverlay"
                                 PaneBackground="{StaticResource PrimaryBlack}"
                                 Foreground="White"
                                 ItemClick="OnMenuItemClick"
-                                OptionsItemClick="OnMenuItemClick">
+                                ItemTemplate="{StaticResource MenuItemTemplate}"
+                                OptionsItemClick="OnMenuItemClick"
+                                OptionsItemTemplate="{StaticResource MenuItemTemplate}">
             <Frame x:Name="ContentFrame">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
