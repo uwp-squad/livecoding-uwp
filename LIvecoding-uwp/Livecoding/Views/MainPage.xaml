@@ -5,9 +5,27 @@
     xmlns:local="using:Livecoding.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <controls:HamburgerMenu x:Name="HamburgerMenuControl"
+                                DisplayMode="CompactOverlay"
+                                PaneBackground="{StaticResource PrimaryBlack}"
+                                Foreground="White"
+                                ItemClick="OnMenuItemClick"
+                                OptionsItemClick="OnMenuItemClick">
+            <Frame x:Name="ContentFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </controls:HamburgerMenu>
     </Grid>
 </Page>

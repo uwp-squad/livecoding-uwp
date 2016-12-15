@@ -5,10 +5,17 @@
     xmlns:local="using:Livecoding.UWP"
     xmlns:inf="using:Livecoding.UWP.Infrastructure"
     RequestedTheme="Light">
-    
+
     <Application.Resources>
         <ResourceDictionary>
+            <!-- ViewModelLocator -->
             <inf:ViewModelLocator x:Key="Locator" />
+
+            <!-- Colors -->
+            <SolidColorBrush x:Key="PrimaryBlack" Color="#161a1e" />
+            <SolidColorBrush x:Key="SecondaryBlack" Color="#22282e" />
+            <SolidColorBrush x:Key="PrimaryWhite" Color="#f1f1f1" />
+            <SolidColorBrush x:Key="PrimaryBlue" Color="#76b6e1" />
         </ResourceDictionary>
     </Application.Resources>
 

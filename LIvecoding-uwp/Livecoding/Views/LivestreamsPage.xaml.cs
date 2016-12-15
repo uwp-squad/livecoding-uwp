@@ -15,26 +15,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Livecoding.UWP.Views
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class LivestreamsPage : Page
     {
-        public MainPage()
+        public LivestreamsPage()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (e.NavigationMode == NavigationMode.New)
-            {
-                ContentFrame.Navigate(typeof(LivestreamsPage));
-            }
-        }
-
-        private void OnMenuItemClick(object sender, ItemClickEventArgs e)
-        {
-            // TODO
         }
     }
 }
