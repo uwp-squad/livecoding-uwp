@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight.Views;
 using Windows.UI.Core;
 using Windows.ApplicationModel.Core;
 
-namespace Livecoding.UWP.Infrastructure
+namespace Livecoding.UWP.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {

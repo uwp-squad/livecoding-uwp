@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Livecoding.UWP.ViewModels;
 using Livecoding.UWP.Views;
 using LivecodingApi.Services;
 using Microsoft.Practices.ServiceLocation;
@@ -28,6 +29,7 @@ namespace Livecoding.UWP.Infrastructure
             }
 
             // Register ViewModels
+            SimpleIoc.Default.Register<LivestreamsViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
         }
 
@@ -48,6 +50,11 @@ namespace Livecoding.UWP.Infrastructure
         #endregion
 
         #region ViewModels
+
+        public LivestreamsViewModel Livestreams
+        {
+            get { return ServiceLocator.Current.GetInstance<LivestreamsViewModel>(); }
+        }
 
         public LoginViewModel Login
         {
