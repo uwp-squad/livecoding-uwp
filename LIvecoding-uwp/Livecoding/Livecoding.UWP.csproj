@@ -101,6 +101,7 @@
     <Compile Include="Infrastructure\ViewModelLocator.cs" />
     <Compile Include="ViewModels\LivestreamsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\StreamViewModel.cs" />
     <Compile Include="Views\LivestreamsPage.xaml.cs">
       <DependentUpon>LivestreamsPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +110,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StreamPage.xaml.cs">
+      <DependentUpon>StreamPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StreamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="Livecoding.UWP.Views.StreamPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Livecoding.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding Stream, Source={StaticResource Locator}}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{StaticResource SecondaryBlack}">
+            <TextBlock Text="{Binding Path=Title}" Foreground="White" 
+                       FontSize="40" Padding="12 12 12 24" />
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="0" />
+            </Grid.ColumnDefinitions>
+            
+            <MediaPlayerElement Grid.Column="0" x:Name="VideoStream" 
+                                Source="{Binding Path=ViewingSource}"
+                                AreTransportControlsEnabled="True" />
+
+            <Grid Grid.Column="1" x:Name="Chat">
+                <!-- TODO -->
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

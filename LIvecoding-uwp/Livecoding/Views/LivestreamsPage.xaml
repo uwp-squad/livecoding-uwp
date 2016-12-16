@@ -51,7 +51,9 @@
                                    ItemsSource="{Binding Path=LiveStreams}"
                                    ItemHeight="200"
                                    DesiredWidth="250"
-                                   ItemTemplate="{StaticResource LivestreamTemplate}">
+                                   ItemTemplate="{StaticResource LivestreamTemplate}"
+                                   IsItemClickEnabled="True"
+                                   ItemClickCommand="{Binding Path=SelectLivestreamCommand}">
         </controls:AdaptiveGridView>
     </Grid>
 </Page>

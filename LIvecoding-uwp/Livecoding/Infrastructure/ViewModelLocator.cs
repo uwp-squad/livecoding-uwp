@@ -31,6 +31,7 @@ namespace Livecoding.UWP.Infrastructure
             // Register ViewModels
             SimpleIoc.Default.Register<LivestreamsViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<StreamViewModel>();
         }
 
         #endregion
@@ -43,6 +44,7 @@ namespace Livecoding.UWP.Infrastructure
 
             navigationService.Configure("Login", typeof(LoginPage));
             navigationService.Configure("Main", typeof(MainPage));
+            navigationService.Configure("Stream", typeof(StreamPage)); // TODO : embed view inside Hamburger Menu
 
             return navigationService;
         }
@@ -59,6 +61,11 @@ namespace Livecoding.UWP.Infrastructure
         public LoginViewModel Login
         {
             get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
+        }
+
+        public StreamViewModel Stream
+        {
+            get { return ServiceLocator.Current.GetInstance<StreamViewModel>(); }
         }
 
         #endregion

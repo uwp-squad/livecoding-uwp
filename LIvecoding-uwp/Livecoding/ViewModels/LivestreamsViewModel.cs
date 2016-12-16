@@ -1,12 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using LivecodingApi.Model;
 using LivecodingApi.Services;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 
@@ -16,6 +20,7 @@ namespace Livecoding.UWP.ViewModels
     {
         #region Fields
 
+        private INavigationService _navigationService;
         private IReactiveLivecodingApiService _livecodingApiService;
 
         #endregion
@@ -26,19 +31,39 @@ namespace Livecoding.UWP.ViewModels
 
         #endregion
 
+        #region Commands
+
+        public ICommand SelectLivestreamCommand { get; }
+
+        #endregion
+
         #region Constructor
 
         public LivestreamsViewModel(
+            INavigationService navigationService,
             IReactiveLivecodingApiService livecodingApiService)
         {
+            _navigationService = navigationService;
             _livecodingApiService = livecodingApiService;
+
+            SelectLivestreamCommand = new RelayCommand<LiveStream>(SelectLivestream);
 
             LoadLivestreams();
         }
 
         #endregion
 
-        #region Methods
+        #region Command Methods
+
+        private void SelectLivestream(LiveStream stream)
+        {
+            ServiceLocator.Current.GetInstance<StreamViewModel>().SelectLivestream(stream);
+            _navigationService.NavigateTo("Stream");
+        }
+
+        #endregion
+
+        #region Public Methods
 
         public void LoadLivestreams()
         {
