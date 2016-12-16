@@ -5,53 +5,59 @@
     xmlns:local="using:Livecoding.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lvmodels="using:LivecodingApi.Model"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     DataContext="{Binding Livestreams, Source={StaticResource Locator}}">
 
     <Page.Resources>
-        <DataTemplate x:Key="LivestreamTemplate">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <DataTemplate x:Key="LivestreamTemplate" x:DataType="lvmodels:LiveStream">
+            <controls:DropShadowPanel Margin="2" BlurRadius="6.0" ShadowOpacity="0.8">
+                <Grid Background="{StaticResource SecondaryBlack}" Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Source="{Binding Path=ThumbnailUrl}" />
+                    <Image Grid.Row="0" Source="{Binding Path=ThumbnailUrl}" />
 
-                <TextBlock Grid.Row="1" Text="{Binding Path=Title}"
-                           FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}" />
+                    <TextBlock Grid.Row="1" Text="{Binding Path=Title}"
+                               FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}"
+                               HorizontalAlignment="Stretch"
+                               TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
 
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="{Binding Path=CodingCategory}"
-                               Foreground="#929497" FontSize="12" />
+                        <TextBlock Grid.Column="0" Text="{Binding Path=CodingCategory}"
+                                   Foreground="#929497" FontSize="12"
+                                   VerticalAlignment="Bottom" />
 
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <SymbolIcon Symbol="Contact" Foreground="#929497" RenderTransformOrigin="0.5,0.5" >
-                            <SymbolIcon.RenderTransform>
-                                <CompositeTransform ScaleY="0.5" ScaleX="0.5"/>
-                            </SymbolIcon.RenderTransform>
-                        </SymbolIcon>
-                        <TextBlock Text="{Binding Path=ViewersLive}" VerticalAlignment="Center"
-                                   Foreground="#929497" FontSize="12" />
-                    </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <SymbolIcon Symbol="Contact" Foreground="#929497" RenderTransformOrigin="0.5,0.5" >
+                                <SymbolIcon.RenderTransform>
+                                    <CompositeTransform ScaleY="0.5" ScaleX="0.5"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                            <TextBlock Text="{Binding Path=ViewersLive}" VerticalAlignment="Center"
+                                       Foreground="#929497" FontSize="12" />
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </controls:DropShadowPanel>
         </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:AdaptiveGridView x:Name="AdaptiveGridViewControl"
                                    ItemsSource="{Binding Path=LiveStreams}"
-                                   ItemHeight="200"
-                                   DesiredWidth="250"
-                                   ItemTemplate="{StaticResource LivestreamTemplate}">
+                                   DesiredWidth="300"
+                                   ItemTemplate="{StaticResource LivestreamTemplate}"
+                                   SelectionMode="None">
         </controls:AdaptiveGridView>
     </Grid>
 </Page>
