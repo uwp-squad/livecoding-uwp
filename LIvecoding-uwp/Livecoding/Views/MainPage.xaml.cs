@@ -1,4 +1,5 @@
-﻿using Livecoding.UWP.Models;
+﻿using Livecoding.UWP.Constants;
+using Livecoding.UWP.Models;
 using Livecoding.UWP.Services;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -50,7 +51,7 @@ namespace Livecoding.UWP.Views
             {
                 // Initialize hamburger menu service
                 InitializeHamburgerNavigationService();
-                _hamburgerMenuService.NavigateTo("Livestreams");
+                _hamburgerMenuService.NavigateTo(ViewConstants.Livestreams);
             }
         }
 
@@ -69,8 +70,8 @@ namespace Livecoding.UWP.Views
             _hamburgerMenuService.SetHamburgerMenuElement(HamburgerMenuControl);
             _hamburgerMenuService.SetFrameElement(ContentFrame);
 
-            _hamburgerMenuService.Configure("Stream", typeof(StreamPage));
-            _hamburgerMenuService.Configure("Livestreams", typeof(LivestreamsPage));
+            _hamburgerMenuService.Configure(ViewConstants.Stream, typeof(StreamPage));
+            _hamburgerMenuService.Configure(ViewConstants.Livestreams, typeof(LivestreamsPage));
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Livecoding.UWP.Constants;
 using Livecoding.UWP.Services;
 using Livecoding.UWP.ViewModels;
 using Livecoding.UWP.Views;
@@ -49,8 +50,8 @@ namespace Livecoding.UWP.Infrastructure
         {
             var navigationService = new NavigationService();
 
-            navigationService.Configure("Login", typeof(LoginPage));
-            navigationService.Configure("Main", typeof(MainPage));
+            navigationService.Configure(ViewConstants.Login, typeof(LoginPage));
+            navigationService.Configure(ViewConstants.Main, typeof(MainPage));
 
             return navigationService;
         }

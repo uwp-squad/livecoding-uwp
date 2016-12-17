@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Livecoding.UWP.Constants;
 using Livecoding.UWP.Services;
 using LivecodingApi.Model;
 using LivecodingApi.Services;
@@ -58,7 +59,7 @@ namespace Livecoding.UWP.ViewModels
         private void SelectLivestream(LiveStream stream)
         {
             ServiceLocator.Current.GetInstance<StreamViewModel>().SelectLivestream(stream);
-            _hamburgerNavigationService.NavigateTo("Stream");
+            _hamburgerNavigationService.NavigateTo(ViewConstants.Stream);
         }
 
         #endregion

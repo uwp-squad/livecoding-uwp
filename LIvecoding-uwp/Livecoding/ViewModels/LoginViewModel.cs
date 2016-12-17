@@ -40,7 +40,7 @@ namespace Livecoding.UWP.ViewModels
             RetrieveUserToken();
             if (!string.IsNullOrWhiteSpace(_livecodingApiService.Token))
             {
-                _navigationService.NavigateTo("Main");
+                _navigationService.NavigateTo(ViewConstants.Main);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace Livecoding.UWP.ViewModels
 
                         await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
                         {
-                            _navigationService.NavigateTo("Main");
+                            _navigationService.NavigateTo(ViewConstants.Main);
                         });
                     }
                     else
