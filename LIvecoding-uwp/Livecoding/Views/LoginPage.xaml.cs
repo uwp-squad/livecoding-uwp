@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Livecoding.UWP.ViewModels;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Livecoding.UWP.Views
 {
@@ -8,6 +11,11 @@ namespace Livecoding.UWP.Views
         public LoginPage()
         {
             this.InitializeComponent();
+
+            Loaded += (sender, e) =>
+            {
+                ServiceLocator.Current.GetInstance<LoginViewModel>().TryAuthenticate();
+            };
         }
     }
 }
