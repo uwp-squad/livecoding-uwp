@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Livecoding.UWP.Services;
 using Livecoding.UWP.ViewModels;
 using Livecoding.UWP.Views;
 using LivecodingApi.Services;
@@ -28,6 +29,12 @@ namespace Livecoding.UWP.Infrastructure
                 SimpleIoc.Default.Register<IReactiveLivecodingApiService>(() => livecodingApiService);
             }
 
+            if (!SimpleIoc.Default.IsRegistered<ISubNavigationService>())
+            {
+                var subNavigationService = new SubNavigationService();
+                SimpleIoc.Default.Register<ISubNavigationService>(() => subNavigationService);
+            }
+
             // Register ViewModels
             SimpleIoc.Default.Register<LivestreamsViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
@@ -44,7 +51,6 @@ namespace Livecoding.UWP.Infrastructure
 
             navigationService.Configure("Login", typeof(LoginPage));
             navigationService.Configure("Main", typeof(MainPage));
-            navigationService.Configure("Stream", typeof(StreamPage)); // TODO : embed view inside Hamburger Menu
 
             return navigationService;
         }

@@ -1,4 +1,6 @@
 ﻿using Livecoding.UWP.Models;
+using Livecoding.UWP.Services;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,7 +43,9 @@ namespace Livecoding.UWP.Views
 
             if (e.NavigationMode == NavigationMode.New)
             {
-                ContentFrame.Navigate(typeof(LivestreamsPage));
+                // Configure and start SubNavigation Service
+                var subNavigationService = CreateSubNavigationService();
+                subNavigationService.NavigateTo("Livestreams");
             }
         }
 
@@ -55,11 +59,23 @@ namespace Livecoding.UWP.Views
 
         #region Methods
 
+        private ISubNavigationService CreateSubNavigationService()
+        {
+            var subNavigationService = ServiceLocator.Current.GetInstance<ISubNavigationService>();
+            subNavigationService.SetFrameElement(ContentFrame);
+
+            subNavigationService.Configure("Stream", typeof(StreamPage));
+            subNavigationService.Configure("Livestreams", typeof(LivestreamsPage));
+
+            return subNavigationService;
+        }
+
         private List<MenuItem> GetMainItems()
         {
             return new List<MenuItem>
             {
-                new MenuItem { Icon = Symbol.Home, Name = "Livestreams", PageType = typeof(LivestreamsPage) }
+                new MenuItem { Icon = Symbol.Home, Name = "Livestreams", PageType = typeof(LivestreamsPage) },
+                new MenuItem { Icon = Symbol.Play, Name = "Watch", PageType = typeof(StreamPage) }
             };
         }
 

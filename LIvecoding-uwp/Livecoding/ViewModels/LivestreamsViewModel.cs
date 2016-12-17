@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
+using Livecoding.UWP.Services;
 using LivecodingApi.Model;
 using LivecodingApi.Services;
 using Microsoft.Practices.ServiceLocation;
@@ -20,7 +20,7 @@ namespace Livecoding.UWP.ViewModels
     {
         #region Fields
 
-        private INavigationService _navigationService;
+        private ISubNavigationService _subNavigationService;
         private IReactiveLivecodingApiService _livecodingApiService;
 
         #endregion
@@ -40,10 +40,10 @@ namespace Livecoding.UWP.ViewModels
         #region Constructor
 
         public LivestreamsViewModel(
-            INavigationService navigationService,
+            ISubNavigationService subNavigationService,
             IReactiveLivecodingApiService livecodingApiService)
         {
-            _navigationService = navigationService;
+            _subNavigationService = subNavigationService;
             _livecodingApiService = livecodingApiService;
 
             SelectLivestreamCommand = new RelayCommand<LiveStream>(SelectLivestream);
@@ -58,7 +58,7 @@ namespace Livecoding.UWP.ViewModels
         private void SelectLivestream(LiveStream stream)
         {
             ServiceLocator.Current.GetInstance<StreamViewModel>().SelectLivestream(stream);
-            _navigationService.NavigateTo("Stream");
+            _subNavigationService.NavigateTo("Stream");
         }
 
         #endregion

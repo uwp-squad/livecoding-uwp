@@ -8,7 +8,8 @@
     xmlns:lvmodels="using:LivecodingApi.Model"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    DataContext="{Binding Livestreams, Source={StaticResource Locator}}">
+    DataContext="{Binding Livestreams, Source={StaticResource Locator}}"
+    NavigationCacheMode="Required">
 
     <Page.Resources>
         <DataTemplate x:Key="LivestreamTemplate" x:DataType="lvmodels:LiveStream">
