@@ -20,7 +20,7 @@ namespace Livecoding.UWP.ViewModels
     {
         #region Fields
 
-        private ISubNavigationService _subNavigationService;
+        private IHamburgerMenuService _hamburgerNavigationService;
         private IReactiveLivecodingApiService _livecodingApiService;
 
         #endregion
@@ -40,10 +40,10 @@ namespace Livecoding.UWP.ViewModels
         #region Constructor
 
         public LivestreamsViewModel(
-            ISubNavigationService subNavigationService,
+            IHamburgerMenuService hamburgerNavigationService,
             IReactiveLivecodingApiService livecodingApiService)
         {
-            _subNavigationService = subNavigationService;
+            _hamburgerNavigationService = hamburgerNavigationService;
             _livecodingApiService = livecodingApiService;
 
             SelectLivestreamCommand = new RelayCommand<LiveStream>(SelectLivestream);
@@ -58,7 +58,7 @@ namespace Livecoding.UWP.ViewModels
         private void SelectLivestream(LiveStream stream)
         {
             ServiceLocator.Current.GetInstance<StreamViewModel>().SelectLivestream(stream);
-            _subNavigationService.NavigateTo("Stream");
+            _hamburgerNavigationService.NavigateTo("Stream");
         }
 
         #endregion

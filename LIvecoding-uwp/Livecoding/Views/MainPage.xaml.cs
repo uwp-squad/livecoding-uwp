@@ -20,17 +20,22 @@ namespace Livecoding.UWP.Views
 {
     public sealed partial class MainPage : Page
     {
+        #region Fields
+
+        private IHamburgerMenuService _hamburgerMenuService;
+
+        #endregion
+
         #region Constructor
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            var mainItems = GetMainItems();
+            _hamburgerMenuService = ServiceLocator.Current.GetInstance<IHamburgerMenuService>();
 
-            HamburgerMenuControl.ItemsSource = mainItems;
-            HamburgerMenuControl.SelectedItem = mainItems.FirstOrDefault();
-            HamburgerMenuControl.OptionsItemsSource = GetOptionsItems();
+            HamburgerMenuControl.ItemsSource = _hamburgerMenuService.MenuItems.Where(item => item.Type == MenuItemType.Main);
+            HamburgerMenuControl.OptionsItemsSource = _hamburgerMenuService.MenuItems.Where(item => item.Type == MenuItemType.Options);
         }
 
         #endregion
@@ -43,9 +48,9 @@ namespace Livecoding.UWP.Views
 
             if (e.NavigationMode == NavigationMode.New)
             {
-                // Configure and start SubNavigation Service
-                var subNavigationService = CreateSubNavigationService();
-                subNavigationService.NavigateTo("Livestreams");
+                // Initialize hamburger menu service
+                InitializeHamburgerNavigationService();
+                _hamburgerMenuService.NavigateTo("Livestreams");
             }
         }
 
@@ -59,32 +64,13 @@ namespace Livecoding.UWP.Views
 
         #region Methods
 
-        private ISubNavigationService CreateSubNavigationService()
+        private void InitializeHamburgerNavigationService()
         {
-            var subNavigationService = ServiceLocator.Current.GetInstance<ISubNavigationService>();
-            subNavigationService.SetFrameElement(ContentFrame);
+            _hamburgerMenuService.SetHamburgerMenuElement(HamburgerMenuControl);
+            _hamburgerMenuService.SetFrameElement(ContentFrame);
 
-            subNavigationService.Configure("Stream", typeof(StreamPage));
-            subNavigationService.Configure("Livestreams", typeof(LivestreamsPage));
-
-            return subNavigationService;
-        }
-
-        private List<MenuItem> GetMainItems()
-        {
-            return new List<MenuItem>
-            {
-                new MenuItem { Icon = Symbol.Home, Name = "Livestreams", PageType = typeof(LivestreamsPage) },
-                new MenuItem { Icon = Symbol.Play, Name = "Watch", PageType = typeof(StreamPage) }
-            };
-        }
-
-        private List<MenuItem> GetOptionsItems()
-        {
-            return new List<MenuItem>
-            {
-
-            };
+            _hamburgerMenuService.Configure("Stream", typeof(StreamPage));
+            _hamburgerMenuService.Configure("Livestreams", typeof(LivestreamsPage));
         }
 
         #endregion

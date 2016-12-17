@@ -29,10 +29,10 @@ namespace Livecoding.UWP.Infrastructure
                 SimpleIoc.Default.Register<IReactiveLivecodingApiService>(() => livecodingApiService);
             }
 
-            if (!SimpleIoc.Default.IsRegistered<ISubNavigationService>())
+            if (!SimpleIoc.Default.IsRegistered<IHamburgerMenuService>())
             {
-                var subNavigationService = new SubNavigationService();
-                SimpleIoc.Default.Register<ISubNavigationService>(() => subNavigationService);
+                var hamburgerMenuService = new HamburgerMenuService();
+                SimpleIoc.Default.Register<IHamburgerMenuService>(() => hamburgerMenuService);
             }
 
             // Register ViewModels

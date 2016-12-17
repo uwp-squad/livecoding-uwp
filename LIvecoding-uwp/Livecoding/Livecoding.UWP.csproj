@@ -98,9 +98,10 @@
     <Compile Include="Configuration\AuthConstants.cs" />
     <Compile Include="Constants\LoginConstants.cs" />
     <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\MenuItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\ViewModelLocator.cs" />
-    <Compile Include="Services\SubNavigationService.cs" />
+    <Compile Include="Services\HamburgerMenuService.cs" />
     <Compile Include="ViewModels\LivestreamsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\StreamViewModel.cs" />
