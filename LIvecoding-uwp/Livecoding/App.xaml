@@ -11,6 +11,11 @@
             <!-- ViewModelLocator -->
             <inf:ViewModelLocator x:Key="Locator" />
 
+            <!-- Adaptative properties -->
+            <x:Double x:Key="SmallScreenWidth">0</x:Double>
+            <x:Double x:Key="MediumScreenWidth">700</x:Double>
+            <x:Double x:Key="LargeScreenWidth">1500</x:Double>
+            
             <!-- Colors -->
             <SolidColorBrush x:Key="PrimaryBlack" Color="#161a1e" />
             <SolidColorBrush x:Key="SecondaryBlack" Color="#22282e" />

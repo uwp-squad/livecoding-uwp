@@ -10,29 +10,55 @@
     NavigationCacheMode="Required">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Small">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource SmallScreenWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StreamTitle.FontSize" Value="20" />
+                        <Setter Target="StreamTitle.Padding" Value="6 6 6 12" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumScreenWidth}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StreamTitle.FontSize" Value="32" />
+                        <Setter Target="StreamTitle.Padding" Value="12 12 12 24" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource LargeScreenWidth}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StreamTitle.FontSize" Value="40" />
+                        <Setter Target="StreamTitle.Padding" Value="12 12 12 24" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="{StaticResource SecondaryBlack}">
-            <TextBlock Text="{Binding Path=Title}" Foreground="White" 
-                       FontSize="40" Padding="12 12 12 24" />
+            <TextBlock x:Name="StreamTitle"
+                       Text="{Binding Path=Title}" Foreground="White" 
+                       FontSize="32" Padding="12 12 12 24" />
         </Grid>
-        
+
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0" />
-            </Grid.ColumnDefinitions>
-            
-            <MediaPlayerElement Grid.Column="0" x:Name="VideoStream" 
+            <MediaPlayerElement x:Name="VideoStream" 
                                 Source="{Binding Path=ViewingSource}"
                                 AreTransportControlsEnabled="True" />
-
-            <Grid Grid.Column="1" x:Name="Chat">
-                <!-- TODO -->
-            </Grid>
         </Grid>
     </Grid>
 </Page>
