@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:lvcontrols="using:Livecoding.UWP.Controls"
+    xmlns:usercontrols="using:Livecoding.UWP.UserControls"
     mc:Ignorable="d"
     DataContext="{Binding Stream, Source={StaticResource Locator}}"
     NavigationCacheMode="Required">
@@ -17,7 +18,13 @@
                                 Source="{Binding Path=ViewingSource}"
                                 AreTransportControlsEnabled="True">
                 <MediaPlayerElement.TransportControls>
-                    <lvcontrols:LivecodingMediaTransportControls Background="{StaticResource SecondaryBlackSemiTransparent}" /> 
+                    <lvcontrols:LivecodingMediaTransportControls Background="{StaticResource SecondaryBlackSemiTransparent}">
+                        <lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
+                            <DataTemplate>
+                                <usercontrols:StreamHeaderControl />
+                            </DataTemplate>
+                        </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
+                    </lvcontrols:LivecodingMediaTransportControls>
                 </MediaPlayerElement.TransportControls>
             </MediaPlayerElement>
         </Grid>

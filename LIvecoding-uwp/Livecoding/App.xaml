@@ -526,63 +526,13 @@
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
-
-                                    <!-- Title states -->
-                                    <VisualStateGroup>
-                                        <VisualState x:Name="Small">
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="{StaticResource SmallScreenWidth}" />
-                                            </VisualState.StateTriggers>
-                                            <VisualState.Setters>
-                                                <Setter Target="TitlePanelGrid.Padding" Value="6 6 6 12" />
-                                                <Setter Target="TitleText.FontSize" Value="20" />
-                                                <Setter Target="TitleText.Margin" Value="0 6 0 0" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-
-                                        <VisualState x:Name="Medium">
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="{StaticResource MediumScreenWidth}"/>
-                                            </VisualState.StateTriggers>
-                                            <VisualState.Setters>
-                                                <Setter Target="TitlePanelGrid.Padding" Value="12 12 12 24" />
-                                                <Setter Target="TitleText.FontSize" Value="32" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-
-                                        <VisualState x:Name="Large">
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="{StaticResource LargeScreenWidth}"/>
-                                            </VisualState.StateTriggers>
-                                            <VisualState.Setters>
-                                                <Setter Target="TitlePanelGrid.Padding" Value="12 12 12 24" />
-                                                <Setter Target="TitleText.FontSize" Value="40" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
 
                                 <Border x:Name="ControlPanel_ControlPanelVisibilityStates_Border">
                                     <Grid>
-                                        <StackPanel x:Name="TitlePanelGrid"
-                                                    Background="{TemplateBinding Background}"
-                                                    VerticalAlignment="Top"
-                                                    RenderTransformOrigin="0.5,0.5"
-                                                    Padding="12 12 12 24">
-                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                                <Ellipse Height="40" Width="40">
-                                                    <Ellipse.Fill>
-                                                        <ImageBrush ImageSource="{Binding Path=AvatarUrl}" />
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-
-                                                <TextBlock Text="{Binding Path=OwnerUsername}" FontSize="18"
-                                                           VerticalAlignment="Center" Margin="10 0 0 0" />
-                                            </StackPanel>
-
-                                            <TextBlock x:Name="TitleText"
-                                                       Text="{Binding Path=Title}" FontSize="32" />
-                                        </StackPanel>
+                                        <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                          Background="{TemplateBinding Background}"
+                                                          VerticalAlignment="Top" />
 
                                         <Grid x:Name="ControlPanelGrid"
                                               Background="{TemplateBinding Background}"
