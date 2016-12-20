@@ -5,60 +5,21 @@
     xmlns:local="using:Livecoding.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lvcontrols="using:Livecoding.UWP.Controls"
     mc:Ignorable="d"
     DataContext="{Binding Stream, Source={StaticResource Locator}}"
     NavigationCacheMode="Required">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Small">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource SmallScreenWidth}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="StreamTitle.FontSize" Value="20" />
-                        <Setter Target="StreamTitle.Padding" Value="6 6 6 12" />
-                    </VisualState.Setters>
-                </VisualState>
-
-                <VisualState x:Name="Medium">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumScreenWidth}"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="StreamTitle.FontSize" Value="32" />
-                        <Setter Target="StreamTitle.Padding" Value="12 12 12 24" />
-                    </VisualState.Setters>
-                </VisualState>
-
-                <VisualState x:Name="Large">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource LargeScreenWidth}"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="StreamTitle.FontSize" Value="40" />
-                        <Setter Target="StreamTitle.Padding" Value="12 12 12 24" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Background="{StaticResource SecondaryBlack}">
-            <TextBlock x:Name="StreamTitle"
-                       Text="{Binding Path=Title}" Foreground="White" 
-                       FontSize="32" Padding="12 12 12 24" />
-        </Grid>
-
-        <Grid Grid.Row="1">
+        <Grid>
             <MediaPlayerElement x:Name="VideoStream" 
+                                RequestedTheme="Dark"
                                 Source="{Binding Path=ViewingSource}"
-                                AreTransportControlsEnabled="True" />
+                                AreTransportControlsEnabled="True">
+                <MediaPlayerElement.TransportControls>
+                    <lvcontrols:LivecodingMediaTransportControls Background="{StaticResource SecondaryBlackSemiTransparent}" /> 
+                </MediaPlayerElement.TransportControls>
+            </MediaPlayerElement>
         </Grid>
     </Grid>
 </Page>
