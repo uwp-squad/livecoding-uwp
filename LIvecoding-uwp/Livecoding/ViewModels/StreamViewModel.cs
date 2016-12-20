@@ -78,8 +78,16 @@ namespace Livecoding.UWP.ViewModels
             Description = stream.Description;
 
             // Set source of the stream video
-            var httpsViewingUrls = stream.ViewingUrls.Where(url => url.StartsWith("https")); // TODO : handle exception if no https streaming url
-            ViewingSource = MediaSource.CreateFromUri(new Uri(httpsViewingUrls.First()));
+            var httpsViewingUrls = stream.ViewingUrls.Where(url => url.StartsWith("https"));
+            if (httpsViewingUrls.Any())
+            {
+                ViewingSource = MediaSource.CreateFromUri(new Uri(httpsViewingUrls.First()));
+            }
+            else
+            {
+                // TODO : handle exception
+                throw new Exception("This streaming channel does not contain HTTPS viewing url.");
+            }
 
             // Retrieve owner information
             _livecodingApiService.GetUserBySlug(stream.UserSlug)
