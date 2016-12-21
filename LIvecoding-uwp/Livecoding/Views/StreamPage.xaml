@@ -16,6 +16,7 @@
             <MediaPlayerElement x:Name="VideoStream" 
                                 RequestedTheme="Dark"
                                 Source="{Binding Path=ViewingSource}"
+                                PosterSource="{Binding Path=ThumbnailUrl}"
                                 AreTransportControlsEnabled="True">
                 <MediaPlayerElement.TransportControls>
                     <lvcontrols:LivecodingMediaTransportControls Background="{StaticResource SecondaryBlackSemiTransparent}">

@@ -43,6 +43,13 @@ namespace Livecoding.UWP.ViewModels
             set { _viewingSource = value; RaisePropertyChanged(); }
         }
 
+        private string _thumbnailUrl;
+        public string ThumbnailUrl
+        {
+            get { return _thumbnailUrl; }
+            set { _thumbnailUrl = value; RaisePropertyChanged(); }
+        }
+
         private string _ownerUsername;
         public string OwnerUsername
         {
@@ -73,9 +80,13 @@ namespace Livecoding.UWP.ViewModels
 
         public void SelectLivestream(LiveStream stream)
         {
+            // Reset viewing source
+            ViewingSource = null;
+
             // Set stream basic properties
             Title = stream.Title;
             Description = stream.Description;
+            ThumbnailUrl = stream.ThumbnailUrl;
 
             // Set source of the stream video
             var httpsViewingUrls = stream.ViewingUrls.Where(url => url.StartsWith("https"));
@@ -98,7 +109,7 @@ namespace Livecoding.UWP.ViewModels
                         OwnerUsername = user.Username;
                         AvatarUrl = user.Avatar ?? "/Images/user.png";
                     });
-                }, 
+                },
                 (error) =>
                 {
 
