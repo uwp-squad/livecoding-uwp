@@ -551,7 +551,8 @@
                                                 <RowDefinition Height="*" />
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <Border x:Name="ErrorBorder"  Width="320" Height="96"
+                                            <Border x:Name="ErrorBorder" 
+                                                    Width="320" Height="96"
                                                     Grid.ColumnSpan="3"
                                                     HorizontalAlignment="Center" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
                                                     Visibility="Collapsed">

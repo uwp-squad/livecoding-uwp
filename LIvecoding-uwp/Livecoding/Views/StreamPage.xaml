@@ -21,7 +21,7 @@
                     <lvcontrols:LivecodingMediaTransportControls Background="{StaticResource SecondaryBlackSemiTransparent}">
                         <lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                             <DataTemplate>
-                                <usercontrols:StreamHeaderControl />
+                                <usercontrols:StreamHeaderControl DataContext="{Binding Stream, Source={StaticResource Locator}}" />
                             </DataTemplate>
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                     </lvcontrols:LivecodingMediaTransportControls>
