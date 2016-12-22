@@ -97,11 +97,19 @@
     </Compile>
     <Compile Include="Configuration\AuthConstants.cs" />
     <Compile Include="Constants\LoginConstants.cs" />
+    <Compile Include="Constants\ViewConstants.cs" />
+    <Compile Include="Controls\LivecodingMediaTransportControls.cs" />
     <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\MenuItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\ViewModelLocator.cs" />
+    <Compile Include="Services\HamburgerMenuService.cs" />
+    <Compile Include="UserControls\StreamHeaderControl.xaml.cs">
+      <DependentUpon>StreamHeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\LivestreamsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\StreamViewModel.cs" />
     <Compile Include="Views\LivestreamsPage.xaml.cs">
       <DependentUpon>LivestreamsPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +118,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StreamPage.xaml.cs">
+      <DependentUpon>StreamPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +147,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="UserControls\StreamHeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LivestreamsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StreamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

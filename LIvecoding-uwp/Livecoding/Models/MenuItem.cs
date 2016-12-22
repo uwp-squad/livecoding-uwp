@@ -12,5 +12,6 @@ namespace Livecoding.UWP.Models
         public Symbol Icon { get; set; }
         public string Name { get; set; }
         public Type PageType { get; set; }
+        public MenuItemType Type { get; set; }
     }
 }
