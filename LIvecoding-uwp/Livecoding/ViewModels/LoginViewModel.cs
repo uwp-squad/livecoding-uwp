@@ -8,6 +8,9 @@ using Windows.UI.Core;
 using Windows.ApplicationModel.Core;
 using Windows.Security.Credentials;
 using Livecoding.UWP.Constants;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace Livecoding.UWP.ViewModels
 {
@@ -20,6 +23,23 @@ namespace Livecoding.UWP.ViewModels
 
         #endregion
 
+        #region Properties
+
+        private bool _loginFailed;
+        public bool LoginFailed
+        {
+            get { return _loginFailed; }
+            private set { _loginFailed = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand TryAuthenticateCommand { get; }
+
+        #endregion
+
         #region Constructor
 
         public LoginViewModel(
@@ -28,14 +48,24 @@ namespace Livecoding.UWP.ViewModels
         {
             _livecodingApiService = livecodingApiService;
             _navigationService = navigationService;
+
+            TryAuthenticateCommand = new RelayCommand(TryAuthenticate);
         }
 
         #endregion
 
-        #region Public Methods
+        #region Command Methods
 
-        public void TryAuthenticate()
+        public async void TryAuthenticate()
         {
+            if (LoginFailed)
+            {
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                {
+                    LoginFailed = false;
+                });
+            }
+
             // Retrieve token and do not login if we are already connected (token already set)
             RetrieveUserToken();
             if (!string.IsNullOrWhiteSpace(_livecodingApiService.Token))
@@ -60,12 +90,12 @@ namespace Livecoding.UWP.ViewModels
                     }
                     else
                     {
-                        // TODO : throw and handle exception
+                        await HandleLoginFailedAsync();
                     }
                 },
-                (error) =>
+                async (error) =>
                 {
-                    throw new Exception();
+                    await HandleLoginFailedAsync();
                 });
         }
 
@@ -111,6 +141,14 @@ namespace Livecoding.UWP.ViewModels
             {
                 var vault = new PasswordVault();
                 vault.Add(new PasswordCredential(LoginConstants.AppResource, user.Username, _livecodingApiService.Token));
+            });
+        }
+
+        private async Task HandleLoginFailedAsync()
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                LoginFailed = true;
             });
         }
 

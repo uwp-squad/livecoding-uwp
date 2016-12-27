@@ -99,6 +99,7 @@
     <Compile Include="Constants\LoginConstants.cs" />
     <Compile Include="Constants\ViewConstants.cs" />
     <Compile Include="Controls\LivecodingMediaTransportControls.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\MenuItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,6 +5,7 @@
     xmlns:local="using:Livecoding.UWP"
     xmlns:inf="using:Livecoding.UWP.Infrastructure"
     xmlns:lvcontrols="using:Livecoding.UWP.Controls"
+    xmlns:converters="using:Livecoding.UWP.Converters"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -16,6 +17,9 @@
             <x:Double x:Key="SmallScreenWidth">0</x:Double>
             <x:Double x:Key="MediumScreenWidth">700</x:Double>
             <x:Double x:Key="LargeScreenWidth">1500</x:Double>
+            
+            <!-- Converters -->
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
             <!-- Colors -->
             <SolidColorBrush x:Key="PrimaryBlack" Color="#161a1e" />
