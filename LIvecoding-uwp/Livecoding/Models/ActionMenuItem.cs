@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Livecoding.UWP.Models
 {
-    public class ActionMenuItem : MenuItem
+    public class ActionMenuItem : GlyphMenuItem
     {
         public Action Action { get; set; }
     }

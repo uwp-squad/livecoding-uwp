@@ -50,14 +50,14 @@ namespace Livecoding.UWP.Services
             {
                 new NavigationMenuItem
                 {
-                    Icon = Symbol.Home,
+                    Symbol = Symbol.Home,
                     Name = "Livestreams",
                     Type = MenuItemType.Main,
                     PageType = typeof(LivestreamsPage)
                 },
                 new NavigationMenuItem
                 {
-                    Icon = Symbol.Play,
+                    Symbol = Symbol.Play,
                     Name = "Watch",
                     Type = MenuItemType.Main,
                     PageType = typeof(StreamPage)
@@ -68,7 +68,7 @@ namespace Livecoding.UWP.Services
             {
                 var feedbackMenuItem = new ActionMenuItem
                 {
-                    Icon = Symbol.Emoji2,
+                    Glyph = "\uE939",
                     Name = "Feedback",
                     Type = MenuItemType.Options,
                     Action = async () =>

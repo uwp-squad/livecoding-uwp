@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Livecoding.UWP.Models
 {
-    public class NavigationMenuItem : MenuItem
+    public class NavigationMenuItem : SymbolMenuItem
     {
         public Type PageType { get; set; }
     }
