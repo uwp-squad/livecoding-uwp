@@ -99,8 +99,10 @@
     <Compile Include="Constants\LoginConstants.cs" />
     <Compile Include="Constants\ViewConstants.cs" />
     <Compile Include="Controls\LivecodingMediaTransportControls.cs" />
+    <Compile Include="Models\ActionMenuItem.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\MenuItemType.cs" />
+    <Compile Include="Models\NavigationMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\ViewModelLocator.cs" />
     <Compile Include="Services\HamburgerMenuService.cs" />
@@ -145,7 +147,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="UserControls\StreamHeaderControl.xaml">
       <SubType>Designer</SubType>

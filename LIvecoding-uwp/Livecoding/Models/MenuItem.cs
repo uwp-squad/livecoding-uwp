@@ -7,11 +7,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace Livecoding.UWP.Models
 {
-    public class MenuItem
+    public abstract class MenuItem
     {
         public Symbol Icon { get; set; }
         public string Name { get; set; }
-        public Type PageType { get; set; }
         public MenuItemType Type { get; set; }
     }
 }
