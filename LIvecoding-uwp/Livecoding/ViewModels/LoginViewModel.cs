@@ -11,6 +11,10 @@ using Livecoding.UWP.Constants;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Toolkit.Uwp;
+using Microsoft.Practices.ServiceLocation;
+using Livecoding.UWP.Models;
+using System.Collections.Generic;
 
 namespace Livecoding.UWP.ViewModels
 {
@@ -20,6 +24,8 @@ namespace Livecoding.UWP.ViewModels
 
         private IReactiveLivecodingApiService _livecodingApiService;
         private INavigationService _navigationService;
+
+        private IObjectStorageHelper _localObjectStorageHelper;
 
         #endregion
 
@@ -49,6 +55,8 @@ namespace Livecoding.UWP.ViewModels
             _livecodingApiService = livecodingApiService;
             _navigationService = navigationService;
 
+            _localObjectStorageHelper = ServiceLocator.Current.GetInstance<IObjectStorageHelper>(ServiceLocatorConstants.LocalObjectStorageHelper);
+
             TryAuthenticateCommand = new RelayCommand(TryAuthenticate);
         }
 
@@ -66,27 +74,28 @@ namespace Livecoding.UWP.ViewModels
                 });
             }
 
-            // Retrieve token and do not login if we are already connected (token already set)
-            RetrieveUserToken();
-            if (!string.IsNullOrWhiteSpace(_livecodingApiService.Token))
+            // Do not login if we are already connected (token already set)
+            // Retrieve token and username from previous connections
+            string username = RetrieveUserTokenAndUsername();
+
+            if (!string.IsNullOrWhiteSpace(_livecodingApiService.Token) && !string.IsNullOrWhiteSpace(username))
             {
-                _navigationService.NavigateTo(ViewConstants.Main);
-                return;
+                // Check if token has expired
+                var userConnectionProfile = await RetrieveConnectionProfileByUsernameAsync(username);
+                if (userConnectionProfile.ExpirationDate > DateTime.Now)
+                {
+                    _navigationService.NavigateTo(ViewConstants.Main);
+                    return;
+                }
             }
 
             // Login if there is no current user already logged
             _livecodingApiService.Login(AuthConstants.ClientId, AuthConstants.ClientSecret, new[] { AuthenticationScope.Read })
                 .Subscribe(async (result) =>
                 {
-                    // Cache access token in Password vault
                     if (result.HasValue && result.Value)
                     {
-                        SaveUserToken();
-
-                        await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                        {
-                            _navigationService.NavigateTo(ViewConstants.Main);
-                        });
+                        HandleLoginSuccess();
                     }
                     else
                     {
@@ -103,8 +112,10 @@ namespace Livecoding.UWP.ViewModels
 
         #region Private Methods
 
-        private void RetrieveUserToken()
+        private string RetrieveUserTokenAndUsername()
         {
+            string username = null;
+
             try
             {
                 PasswordCredential credential = null;
@@ -128,20 +139,20 @@ namespace Livecoding.UWP.ViewModels
 
                 credential.RetrievePassword();
                 _livecodingApiService.Token = credential.Password;
+                username = credential.UserName;
             }
             catch
             {
                 _livecodingApiService.Token = null;
             }
+
+            return username;
         }
 
-        private void SaveUserToken()
+        private void SaveUserToken(string username)
         {
-            _livecodingApiService.GetCurrentUser().Subscribe((user) =>
-            {
-                var vault = new PasswordVault();
-                vault.Add(new PasswordCredential(LoginConstants.AppResource, user.Username, _livecodingApiService.Token));
-            });
+            var vault = new PasswordVault();
+            vault.Add(new PasswordCredential(LoginConstants.AppResource, username, _livecodingApiService.Token));
         }
 
         private async Task HandleLoginFailedAsync()
@@ -150,6 +161,62 @@ namespace Livecoding.UWP.ViewModels
             {
                 LoginFailed = true;
             });
+        }
+
+        private void HandleLoginSuccess()
+        {
+            _livecodingApiService.GetCurrentUser().Subscribe(async (user) =>
+            {
+                // Cache access token in Password vault
+                SaveUserToken(user.Username);
+
+                // Save user information (connection profile) in local storage
+                var userConnectionProfile = new UserConnnectionProfile
+                {
+                    User = user,
+                    ExpirationDate = DateTime.Now.AddSeconds(LoginConstants.TokenLifetime)
+                };
+                await AddUserConnectionProfileAsync(userConnectionProfile);
+
+                // Navigate to main page
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                {
+                    _navigationService.NavigateTo(ViewConstants.Main);
+                });
+            });
+        }
+
+        #endregion
+
+        #region Manage User Connection Profiles
+
+        private async Task<Dictionary<string, UserConnnectionProfile>> RetrieveDictionaryOfConnectionProfilesAsync()
+        {
+            var dictionaryOfUserConnectionProfiles = new Dictionary<string, UserConnnectionProfile>();
+            if (await _localObjectStorageHelper.FileExistsAsync(LocalStorageConstants.UserConnectionProfiles))
+            {
+                dictionaryOfUserConnectionProfiles = await _localObjectStorageHelper
+                    .ReadFileAsync(LocalStorageConstants.UserConnectionProfiles, dictionaryOfUserConnectionProfiles);
+            }
+
+            return dictionaryOfUserConnectionProfiles;
+        }
+
+        private async Task<UserConnnectionProfile> RetrieveConnectionProfileByUsernameAsync(string username)
+        {
+            // Retrieve a connection profile by username
+            var dictionaryOfUserConnectionProfiles = await RetrieveDictionaryOfConnectionProfilesAsync();
+            return dictionaryOfUserConnectionProfiles[username];
+        }
+
+        private async Task AddUserConnectionProfileAsync(UserConnnectionProfile userConnectionProfile)
+        {
+            // Set the connection profiles inside the list of all existing profiles
+            var dictionaryOfUserConnectionProfiles = await RetrieveDictionaryOfConnectionProfilesAsync();
+            dictionaryOfUserConnectionProfiles[userConnectionProfile.User.Username] = userConnectionProfile;
+
+            // Save the dictionary in local storage
+            await _localObjectStorageHelper.SaveFileAsync(LocalStorageConstants.UserConnectionProfiles, dictionaryOfUserConnectionProfiles);
         }
 
         #endregion

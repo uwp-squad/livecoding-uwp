@@ -6,6 +6,7 @@ using Livecoding.UWP.ViewModels;
 using Livecoding.UWP.Views;
 using LivecodingApi.Services;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Toolkit.Uwp;
 
 namespace Livecoding.UWP.Infrastructure
 {
@@ -34,6 +35,15 @@ namespace Livecoding.UWP.Infrastructure
             {
                 var hamburgerMenuService = new HamburgerMenuService();
                 SimpleIoc.Default.Register<IHamburgerMenuService>(() => hamburgerMenuService);
+            }
+
+            if (!SimpleIoc.Default.IsRegistered<IObjectStorageHelper>())
+            {
+                var localObjectStorageHelper = new LocalObjectStorageHelper();
+                SimpleIoc.Default.Register<IObjectStorageHelper>(() => localObjectStorageHelper, ServiceLocatorConstants.LocalObjectStorageHelper);
+
+                var roamingObjectStorageHelper = new RoamingObjectStorageHelper();
+                SimpleIoc.Default.Register<IObjectStorageHelper>(() => roamingObjectStorageHelper, ServiceLocatorConstants.RoamingObjectStorageHelper);
             }
 
             // Register ViewModels
