@@ -243,3 +243,11 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# AppXBundle
+_scale-400.appx
+_scale-150.appx
+_scale-125.appx
+_scale-100.appx
+_pkginfo.txt
+Package.StoreAssociation.xml
