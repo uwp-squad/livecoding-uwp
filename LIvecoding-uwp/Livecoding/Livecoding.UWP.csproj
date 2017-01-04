@@ -94,6 +94,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="Livecoding.UWP_StoreKey.pfx" />
+    <None Include="NuGet.config" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
