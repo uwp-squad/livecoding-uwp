@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Microsoft.Services.Store.Engagement;
 
 namespace Livecoding.UWP.Services
 {
@@ -31,6 +32,7 @@ namespace Livecoding.UWP.Services
         private Frame _frame;
         private Dictionary<string, Type> _pageTypes = new Dictionary<string, Type>();
         private HamburgerMenu _hamburgerMenu;
+        private string _currentPageKey;
 
         #endregion
 
@@ -46,29 +48,49 @@ namespace Livecoding.UWP.Services
         {
             MenuItems = new List<MenuItem>
             {
-                new MenuItem
+                new NavigationMenuItem
                 {
-                    Icon = Symbol.Home,
+                    Symbol = Symbol.Home,
                     Name = "Livestreams",
-                    PageType = typeof(LivestreamsPage),
-                    Type = MenuItemType.Main
+                    Type = MenuItemType.Main,
+                    PageType = typeof(LivestreamsPage)
                 },
-                new MenuItem {
-                    Icon = Symbol.Play,
+                new NavigationMenuItem
+                {
+                    Symbol = Symbol.Play,
                     Name = "Watch",
-                    PageType = typeof(StreamPage),
-                    Type = MenuItemType.Main
+                    Type = MenuItemType.Main,
+                    PageType = typeof(StreamPage)
                 }
             };
+
+            if (StoreServicesFeedbackLauncher.IsSupported())
+            {
+                var feedbackMenuItem = new ActionMenuItem
+                {
+                    Glyph = "\uE939",
+                    Name = "Feedback",
+                    Type = MenuItemType.Options,
+                    Action = async () =>
+                    {
+                        await StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
+
+                        var pageType = GetPageTypeByKey(_currentPageKey);
+                        ResetSelectedItem(pageType);
+                    }
+                };
+                MenuItems.Add(feedbackMenuItem);
+            }
         }
 
         #endregion
 
-        #region Methods
+        #region Public methods
 
         public void SetFrameElement(Frame frame)
         {
             _frame = frame;
+            _frame.Navigated += (sender, e) => TryResetCurrentPageKey();
         }
 
         public void SetHamburgerMenuElement(HamburgerMenu hamburgerMenu)
@@ -83,10 +105,54 @@ namespace Livecoding.UWP.Services
 
         public void NavigateTo(string pageKey)
         {
-            _pageTypes.TryGetValue(pageKey, out var pageType);
-            _frame.Navigate(pageType);
+            var pageType = GetPageTypeByKey(pageKey);
 
-            _hamburgerMenu.SelectedItem = MenuItems.First(menuItem => menuItem.PageType == pageType);
+            // No page type => no navigation
+            if (pageType == null)
+            {
+                return;
+            }
+
+            _currentPageKey = pageKey;
+
+            // Navigate and reset selected item of the hamburger menu
+            _frame.Navigate(pageType);
+            ResetSelectedItem(pageType);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private Type GetPageTypeByKey(string pageKey)
+        {
+            _pageTypes.TryGetValue(pageKey, out var pageType);
+            return pageType;
+        }
+
+        private void TryResetCurrentPageKey()
+        {
+            if (_frame.CurrentSourcePageType != null)
+            {
+                foreach (var kv in _pageTypes)
+                {
+                    if (kv.Value == _frame.CurrentSourcePageType)
+                    {
+                        _currentPageKey = kv.Key;
+                    }
+                }
+            }
+        }
+
+        private void ResetSelectedItem(Type pageType)
+        {
+            // Retrieve item in the hamburger menu that will be selected
+            _hamburgerMenu.SelectedItem = MenuItems.First(menuItem =>
+            {
+                return menuItem is NavigationMenuItem navigationMenuItem &&
+                       navigationMenuItem.PageType == pageType;
+            });
+            _hamburgerMenu.SelectedOptionsItem = null;
         }
 
         #endregion

@@ -92,8 +92,15 @@ namespace Livecoding.UWP.Views
 
         private void OnMenuItemClick(object sender, ItemClickEventArgs e)
         {
-            var menuItem = e.ClickedItem as MenuItem;
-            ContentFrame.Navigate(menuItem.PageType);
+            if (e.ClickedItem is NavigationMenuItem navigationMenuItem)
+            {
+                ContentFrame.Navigate(navigationMenuItem.PageType);
+            }
+
+            if (e.ClickedItem is ActionMenuItem actionMenuItem)
+            {
+                actionMenuItem.Action();
+            }
         }
 
         #endregion
