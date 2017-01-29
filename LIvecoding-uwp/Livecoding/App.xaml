@@ -5,6 +5,7 @@
     xmlns:local="using:Livecoding.UWP"
     xmlns:inf="using:Livecoding.UWP.Infrastructure"
     xmlns:lvcontrols="using:Livecoding.UWP.Controls"
+    xmlns:templates="using:Livecoding.UWP.Templates"
     xmlns:converters="using:Livecoding.UWP.Converters"
     RequestedTheme="Light">
 
@@ -743,6 +744,42 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <!-- Templates -->
+            <DataTemplate x:Key="SymbolMenuItemTemplate">
+                <Grid Width="240" Height="48">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <SymbolIcon Grid.Column="0" Symbol="{Binding Path=Symbol}" 
+                                Foreground="White" />
+
+                    <TextBlock Grid.Column="1" Text="{Binding Path=Name}" 
+                               FontSize="16" VerticalAlignment="Center" Foreground="White" />
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GlyphMenuItemTemplate">
+                <Grid Width="240" Height="48">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <FontIcon Grid.Column="0" FontFamily="Segoe MDL2 Assets" Glyph="{Binding Path=Glyph}"
+                              Foreground="White" />
+
+                    <TextBlock Grid.Column="1" Text="{Binding Path=Name}" 
+                               FontSize="16" VerticalAlignment="Center" Foreground="White" />
+                </Grid>
+            </DataTemplate>
+
+            <!-- Template selector -->
+            <templates:MenuItemTemplateSelector x:Key="MenuItemTemplateSelector"
+                                                SymbolMenuItemTemplate="{StaticResource SymbolMenuItemTemplate}"
+                                                GlyphMenuItemTemplate="{StaticResource GlyphMenuItemTemplate}" />
         </ResourceDictionary>
     </Application.Resources>
 
