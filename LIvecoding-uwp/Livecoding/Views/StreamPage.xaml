@@ -23,11 +23,24 @@
                         <lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                             <DataTemplate>
                                 <usercontrols:StreamHeaderControl DataContext="{Binding Stream, Source={StaticResource Locator}}" />
+                                
                             </DataTemplate>
+                            
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
+                        
+                            
+                        
                     </lvcontrols:LivecodingMediaTransportControls>
+                    <AppBarButton x:Name="ChatButton"
+                                          Icon="Contact"
+                                          Style="{StaticResource AppBarButtonStyle}"
+                                          MediaTransportControlsHelper.DropoutOrder="5"
+                                          VerticalAlignment="Center"/>
+                    
                 </MediaPlayerElement.TransportControls>
+                
             </MediaPlayerElement>
+            <ListViewItem x:Name="Chatcontrol" IsEnabled="False" />
         </Grid>
     </Grid>
 </Page>
