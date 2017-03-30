@@ -26,7 +26,19 @@
                             </DataTemplate>
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                     </lvcontrols:LivecodingMediaTransportControls>
+                    <AppBarButton x:Name="ChatButton"
+                                          Icon="Contact"
+                                          Style="{StaticResource AppBarButtonStyle}"
+                                          MediaTransportControlsHelper.DropoutOrder="5"
+                                          VerticalAlignment="Center"
+
                 </MediaPlayerElement.TransportControls>
+
+            </MediaPlayerElement>
+            <ListViewItem x:Name="ChatList" IsEnabled="False" Visibility="Collapsed"/>
+
+            </MediaPlayerElement.TransportControls>
+                
             </MediaPlayerElement>
         </Grid>
     </Grid>
