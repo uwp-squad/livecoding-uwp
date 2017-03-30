@@ -710,7 +710,14 @@
                                                                 <SymbolIcon x:Name="VolumeMuteSymbol" Symbol="Volume" />
                                                             </AppBarButton.Icon>
                                                         </AppBarButton>
-                                                        <AppBarButton x:Name="FullWindowButton"
+                                                        <AppBarButton x:Name="ChatButton"
+                                                                      Style="{StaticResource AppBarButtonStyle}"
+                                                                      MediaTransportControlsHelper.DropoutOrder="7">
+                                                            <AppBarButton.Icon>
+                                                                <SymbolIcon Symbol="Comment"/>
+                                                            </AppBarButton.Icon>
+                                                        </AppBarButton>
+                                                            <AppBarButton x:Name="FullWindowButton"
                                                                       Style="{StaticResource AppBarButtonStyle}"
                                                                       MediaTransportControlsHelper.DropoutOrder="8">
                                                             <AppBarButton.Icon>
