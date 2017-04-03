@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Media.Core;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace Livecoding.UWP.ViewModels
 {
@@ -21,6 +22,19 @@ namespace Livecoding.UWP.ViewModels
         #endregion
 
         #region Properties
+        private ListView _chatlist;
+        public ListView ChatList
+        {
+            get { return _chatlist; }
+            set { _chatlist = value; RaisePropertyChanged(); }
+        }
+
+        private bool _showChat;
+        public bool ShowChat
+        {
+            get { return _showChat; }
+            set { _showChat = value; RaisePropertyChanged(); }
+        }
 
         private string _title;
         public string Title
