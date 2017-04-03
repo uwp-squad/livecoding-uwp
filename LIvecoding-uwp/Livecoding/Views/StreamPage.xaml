@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:lvcontrols="using:Livecoding.UWP.Controls"
     xmlns:usercontrols="using:Livecoding.UWP.UserControls"
+    xmlns:controls="using:Windows.UI.Xaml.Controls"
     mc:Ignorable="d"
     DataContext="{Binding Stream, Source={StaticResource Locator}}"
     NavigationCacheMode="Required">
@@ -23,23 +24,31 @@
                         <lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                             <DataTemplate>
                                 <usercontrols:StreamHeaderControl DataContext="{Binding Stream, Source={StaticResource Locator}}" />
+
+                                <controls:AppBarButton x:Name="ChatButton"
+                                          Icon="Contact"
+                                          Style="{StaticResource AppBarButtonStyle}"
+                                          DataContext="{Binding ShowChat, Source = {StaticRessource Locator}}"
+                                          MediaTransportControlsHelper.DropoutOrder="5"
+                                          VerticalAlignment="Center"
+                                          Onclick="ChatHide_Show">
+
+                                </controls:AppBarButton>
                             </DataTemplate>
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                     </lvcontrols:LivecodingMediaTransportControls>
-                    <AppBarButton x:Name="ChatButton"
-                                          Icon="Contact"
-                                          Style="{StaticResource AppBarButtonStyle}"
-                                          MediaTransportControlsHelper.DropoutOrder="5"
-                                          VerticalAlignment="Center"
 
                 </MediaPlayerElement.TransportControls>
 
-            </MediaPlayerElement>
-            <ListViewItem x:Name="ChatList" IsEnabled="False" Visibility="Collapsed"/>
 
-            </MediaPlayerElement.TransportControls>
-                
+
             </MediaPlayerElement>
+
+
+
+            </MediaPlayerElement>
+
         </Grid>
+        <ListView x:Name="ChatList" Visibility="Collapsed"  />
     </Grid>
 </Page>
