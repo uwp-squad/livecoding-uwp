@@ -25,15 +25,7 @@
                             <DataTemplate>
                                 <usercontrols:StreamHeaderControl DataContext="{Binding Stream, Source={StaticResource Locator}}" />
 
-                                <controls:AppBarButton x:Name="ChatButton"
-                                          Icon="Contact"
-                                          Style="{StaticResource AppBarButtonStyle}"
-                                          DataContext="{Binding ShowChat, Source = {StaticRessource Locator}}"
-                                          MediaTransportControlsHelper.DropoutOrder="5"
-                                          VerticalAlignment="Center"
-                                          Onclick="ChatHide_Show">
-
-                                </controls:AppBarButton>
+                                
                             </DataTemplate>
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                     </lvcontrols:LivecodingMediaTransportControls>
@@ -46,9 +38,8 @@
 
 
 
-            </MediaPlayerElement>
+            
 
         </Grid>
-        <ListView x:Name="ChatList" Visibility="Collapsed"  />
     </Grid>
 </Page>

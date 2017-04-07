@@ -504,6 +504,7 @@
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
+                                    
 
                                     <!-- VolumeMute states -->
                                     <VisualStateGroup x:Name="VolumeMuteStates">
@@ -733,6 +734,18 @@
                                                                 <FontIcon Glyph="&#xEC57;"/>
                                                             </AppBarButton.Icon>
                                                         </AppBarButton>
+                                                        <AppBarButton x:Name="ChatButton"
+                                                                      
+                                                                      MediaTransportControlsHelper.DropoutOrder ="5"
+                                                                      Visibility="Collapsed"
+                                                                      Command="ChatVisibilityChange">
+                                                            <AppBarButton.Icon>
+                                                                <FontIcon Glyph="comment"/>
+                                                            </AppBarButton.Icon>
+                                                        </AppBarButton>
+
+
+
                                                     </CommandBar.PrimaryCommands>
                                                 </CommandBar>
                                             </Border>
