@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:lvcontrols="using:Livecoding.UWP.Controls"
     xmlns:usercontrols="using:Livecoding.UWP.UserControls"
+    xmlns:controls="using:Windows.UI.Xaml.Controls"
     mc:Ignorable="d"
     DataContext="{Binding Stream, Source={StaticResource Locator}}"
     NavigationCacheMode="Required">
@@ -23,11 +24,22 @@
                         <lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                             <DataTemplate>
                                 <usercontrols:StreamHeaderControl DataContext="{Binding Stream, Source={StaticResource Locator}}" />
+
+                                
                             </DataTemplate>
                         </lvcontrols:LivecodingMediaTransportControls.HeaderTemplate>
                     </lvcontrols:LivecodingMediaTransportControls>
+
                 </MediaPlayerElement.TransportControls>
+
+
+
             </MediaPlayerElement>
+
+
+
+            
+
         </Grid>
     </Grid>
 </Page>

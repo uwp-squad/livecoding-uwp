@@ -3,12 +3,15 @@ using LivecodingApi.Model;
 using LivecodingApi.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Chat;
 using Windows.ApplicationModel.Core;
 using Windows.Media.Core;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace Livecoding.UWP.ViewModels
 {
@@ -21,6 +24,14 @@ namespace Livecoding.UWP.ViewModels
         #endregion
 
         #region Properties
+        public ObservableCollection<ChatMessage> Messages { get; } = new ObservableCollection<ChatMessage>();
+
+        private bool _showChat;
+        public bool ShowChat
+        {
+            get { return _showChat; }
+            set { _showChat = value; RaisePropertyChanged(); }
+        }
 
         private string _title;
         public string Title
