@@ -82,7 +82,7 @@ namespace Livecoding.UWP.ViewModels
             {
                 // Check if token has expired
                 var userConnectionProfile = await RetrieveConnectionProfileByUsernameAsync(username);
-                if (userConnectionProfile.ExpirationDate > DateTime.Now)
+                if (userConnectionProfile != null && userConnectionProfile.ExpirationDate > DateTime.Now)
                 {
                     _navigationService.NavigateTo(ViewConstants.Main);
                     return;
@@ -206,6 +206,12 @@ namespace Livecoding.UWP.ViewModels
         {
             // Retrieve a connection profile by username
             var dictionaryOfUserConnectionProfiles = await RetrieveDictionaryOfConnectionProfilesAsync();
+
+            if (!dictionaryOfUserConnectionProfiles.ContainsKey(username))
+            {
+                return null;
+            }
+
             return dictionaryOfUserConnectionProfiles[username];
         }
 
